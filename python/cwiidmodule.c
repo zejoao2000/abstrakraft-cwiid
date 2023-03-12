@@ -154,6 +154,8 @@ PyMODINIT_FUNC initcwiid(void)
 
 	PyEval_InitThreads();
 
+	Wiimote_Type.ob_type = &PyType_Type;
+
 	if (PyType_Ready(&Wiimote_Type) < 0) {
 		return;
 	}
