@@ -149,7 +149,7 @@ static struct PyModuleDef cwiidDef = {
 PyMODINIT_FUNC init_cwiid(void)
 {
 	PyObject *Module;
-	PyObject *CObj;
+	PyObject *CCapsule;
 	int i;
 
 	if (PyType_Ready(&Wiimote_Type) < 0) {
