@@ -75,8 +75,7 @@ static PyObject *Wiimote_write(Wiimote *self, PyObject *args, PyObject *kwds);
 static cwiid_mesg_callback_t CallbackBridge;
 PyObject *ConvertMesgArray(int mesg_count, union cwiid_mesg mesg[]);
 
-static PyMethodDef Wiimote_Methods[] =
-{
+static PyMethodDef Wiimote_Methods[] = {
 	{"close", (PyCFunction)Wiimote_close, METH_NOARGS,
 	 "close()\n\nClose the Wiimote connection"},
 	{"enable", (PyCFunction)Wiimote_enable, METH_VARARGS | METH_KEYWORDS,
@@ -115,7 +114,7 @@ static PyGetSetDef Wiimote_GetSet[] = {
 };
 
 PyTypeObject Wiimote_Type = {
-	PyObject_HEAD_INIT(NULL)
+	PyObject_HEAD_INIT(NULL),
 	0,						/* ob_size */
 	"cwiid.Wiimote",		/* tp_name */
 	sizeof(Wiimote),		/* tp_basicsize */
