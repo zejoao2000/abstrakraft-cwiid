@@ -72,7 +72,11 @@ static struct PyModuleDef wmpluginDef = {
 	"wmplugin",
 	"wminput plugin interface",
 	-1,
-	Module_Methods
+	Module_Methods,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
 };
 
 int py_init(void)

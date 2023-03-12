@@ -139,8 +139,12 @@ static struct PyModuleDef cwiidDef = {
         "cwiid",
         "CWiid Wiimote Interface",
         -1,
-        module_functions
-}
+        module_functions,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+};
 
 PyMODINIT_FUNC initcwiid(void)
 {
