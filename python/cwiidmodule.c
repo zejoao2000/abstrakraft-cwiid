@@ -24,6 +24,8 @@
 
 #include <stdlib.h>
 
+#include <ctype.h>
+
 #include <cwiid.h>
 #include "structmember.h"
 

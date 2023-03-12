@@ -23,6 +23,7 @@
 #include "Python.h"
 #include "structmember.h"
 #include <errno.h>
+#include <ctype.h>
 #include <bluetooth/bluetooth.h>
 #include <cwiid.h>
 

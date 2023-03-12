@@ -23,6 +23,8 @@
 
 #include <unistd.h>
 
+#include <ctype.h>
+
 #include "structmember.h"
 #include "cwiid.h"
 
