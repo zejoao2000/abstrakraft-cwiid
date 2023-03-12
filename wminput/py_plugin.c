@@ -61,10 +61,13 @@ static struct {
 	{NULL, 0}
 };
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-function-type"
 static PyMethodDef Module_Methods[] = {
 	{"set_rpt_mode", (PyCFunction)set_rpt_mode, METH_VARARGS | METH_KEYWORDS, "set_rpt_mode(id, rpt_mode)\n\nset the plugin report mode"},
 	{NULL, NULL, 0, NULL}
 };
+#pragma GCC diagnostic pop
 
 static struct PyModuleDef wmpluginDef = {
 	PyModuleDef_HEAD_INIT,
@@ -356,7 +359,7 @@ static int py_plugin_info(struct plugin *plugin, PyObject *info)
 			goto ERR_HND;
 		}
 
-		if (!(plugin->info->button_info[i].name = PyUnicode_AsUTF8(PyObj))) {
+		if (!(plugin->info->button_info[i].name = (char*)PyUnicode_AsUTF8(PyObj))) {
 			PyErr_Print();
 			Py_DECREF(PyObj);
 			goto ERR_HND;
@@ -411,7 +414,7 @@ static int py_plugin_info(struct plugin *plugin, PyObject *info)
 
 	return 0;
 
-ERR_HND:
+	ERR_HND:
 	if (((struct py_plugin *)plugin->p)->PyInfo) {
 		Py_DECREF(((struct py_plugin *)plugin->p)->PyInfo);
 	}
@@ -597,6 +600,8 @@ int py_plugin_param_float(struct plugin *plugin, int i, float value)
 	return 0;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 static PyObject *set_rpt_mode(PyObject *self, PyObject *args, PyObject *kwds)
 {
 	static char *kwlist[] = {"id", "rpt_mode", NULL};
@@ -613,3 +618,4 @@ static PyObject *set_rpt_mode(PyObject *self, PyObject *args, PyObject *kwds)
 
 	Py_RETURN_NONE;
 }
+#pragma GCC diagnostic pop
