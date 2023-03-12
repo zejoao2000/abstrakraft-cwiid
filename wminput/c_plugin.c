@@ -165,6 +165,8 @@ int c_plugin_param_float(struct plugin *plugin, int i, float value)
 	return 0;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 void wmplugin_err(int id, char *str, ...)
 {
 	va_list ap;
@@ -174,3 +176,4 @@ void wmplugin_err(int id, char *str, ...)
 	fprintf(stderr, "\n");
 	va_end(ap);
 }
+#pragma GCC diagnostic pop

@@ -309,6 +309,8 @@ void print_state(struct cwiid_state *state)
  * pass an array of messages, all of which were received at the same time.
  * The id is to distinguish between multiple wiimotes using the same callback.
  * */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count,
                     union cwiid_mesg mesg[], struct timespec *timestamp)
 {
@@ -415,3 +417,4 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count,
 		}
 	}
 }
+#pragma GCC diagnostic pop

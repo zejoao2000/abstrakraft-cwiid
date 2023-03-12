@@ -152,14 +152,12 @@ PyMODINIT_FUNC initcwiid(void)
 	PyObject *CObj;
 	int i;
 
-	PyEval_InitThreads();
-
 	if (PyType_Ready(&Wiimote_Type) < 0) {
-		return;
+		return NULL;
 	}
 
 	if (!(Module = PyModule_Create(&cwiidDef))) {
-		return;
+		return NULL;
 	}
 
 	Py_INCREF(&Wiimote_Type);
@@ -173,8 +171,9 @@ PyMODINIT_FUNC initcwiid(void)
 	}
 
 	if (!(CObj = PyCapsule_New(ConvertMesgArray, NULL, NULL))) {
-		return;
+		return NULL;
 	}
 	PyModule_AddObject(Module, "ConvertMesgArray", CObj);
-}
 
+	return Module;
+}

@@ -778,6 +778,8 @@ static PyObject *Wiimote_send_rpt(Wiimote *self, PyObject *args, PyObject *kwds)
 	Py_RETURN_NONE;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 static PyObject *Wiimote_read(Wiimote *self, PyObject *args, PyObject *kwds)
 {
 	static char *kwlist[] = { "flags", "offset", "len", NULL };
@@ -812,6 +814,7 @@ static PyObject *Wiimote_read(Wiimote *self, PyObject *args, PyObject *kwds)
 
 	return pyRetBuf;
 }
+#pragma GCC diagnostic pop
 
 static PyObject *Wiimote_write(Wiimote *self, PyObject *args, PyObject *kwds)
 {

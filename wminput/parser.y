@@ -35,7 +35,7 @@ extern struct conf *cur_conf;
 	char *String;
 }
 
-%error-verbose
+%define parse.error verbose
 %locations
 
 %token <Int> INT ON_OFF WM_BTN NC_BTN CC_BTN BTN_ACTION AXIS ABS_AXIS_ACTION
