@@ -24,8 +24,6 @@
 
 #include <stdlib.h>
 
-#include <ctype.h>
-
 #include <cwiid.h>
 #include "structmember.h"
 
@@ -164,7 +162,7 @@ PyMODINIT_FUNC initcwiid(void)
 		                        cwiid_constants[i].value);
 	}
 
-	if (!(CObj = PyCObject_FromVoidPtr(ConvertMesgArray, NULL))) {
+	if (!(CObj = PyCapsule_New(ConvertMesgArray, NULL, NULL))) {
 		return;
 	}
 	PyModule_AddObject(Module, "ConvertMesgArray", CObj);

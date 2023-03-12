@@ -23,7 +23,6 @@
 #include "Python.h"
 #include "structmember.h"
 #include <errno.h>
-#include <ctype.h>
 #include <bluetooth/bluetooth.h>
 #include <cwiid.h>
 
@@ -196,8 +195,8 @@ static int Wiimote_init(Wiimote* self, PyObject* args, PyObject *kwds)
 	 * an existing CObject.  Otherwise, create a new one */
 	if (PyTuple_Size(args) == 1) {
 		PyObj = PyTuple_GET_ITEM(args, 0);
-		if (PyCObject_Check(PyObj)) {
-			wiimote = PyCObject_AsVoidPtr(PyObj);
+		if (PyCapsule_IsValid(PyObj, NULL)) {
+			wiimote = PyCapsule_GetPointer(PyObj, NULL);
 			self->close_on_dealloc = 0;
 		}
 	}

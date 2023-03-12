@@ -23,8 +23,6 @@
 
 #include <unistd.h>
 
-#include <ctype.h>
-
 #include "structmember.h"
 #include "cwiid.h"
 
@@ -97,7 +95,7 @@ int py_init(void)
 		PyErr_Print();
 		goto ERR_HND;
 	}
-	ConvertMesgArray = PyCObject_AsVoidPtr(PyObj);
+	ConvertMesgArray = PyCapsule_GetPointer(PyObj, NULL);
 	Py_DECREF(PyObj);
 
 	/* note: PyWmPluginModule is a borrowed reference - do not decref */
@@ -141,27 +139,27 @@ ERR_HND:
 
 int py_wiimote(cwiid_wiimote_t *wiimote)
 {
-	PyObject *PyWiimoteType, *PyCObject, *PyArgs;
+	PyObject *PyWiimoteType, *PyCapsule, *PyArgs;
 
 	if (!(PyWiimoteType = PyObject_GetAttrString(PyCWiidModule, "Wiimote"))) {
 		PyErr_Print();
 		return -1;
 	}
 
-	if (!(PyCObject = PyCObject_FromVoidPtr(wiimote, NULL))) {
+	if (!(PyCapsule = PyCapsule_New(wiimote, NULL, NULL))) {
 		PyErr_Print();
 		Py_DECREF(PyWiimoteType);
 		return -1;
 	}
 
-	if (!(PyArgs = Py_BuildValue("(O)", PyCObject))) {
+	if (!(PyArgs = Py_BuildValue("(O)", PyCapsule))) {
 		PyErr_Print();
-		Py_DECREF(PyCObject);
+		Py_DECREF(PyCapsule);
 		Py_DECREF(PyWiimoteType);
 		return -1;
 	}
 
-	Py_DECREF(PyCObject);
+	Py_DECREF(PyCapsule);
 
 	if (!(PyWiimote = PyObject_CallObject(PyWiimoteType, PyArgs))) {
 		PyErr_Print();
