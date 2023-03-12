@@ -797,7 +797,7 @@ static PyObject *Wiimote_read(Wiimote *self, PyObject *args, PyObject *kwds)
 		return NULL;
 	}
 
-	if (!(pyRetBuf = PyBuffer_New(len))) {
+	if (!(pyRetBuf = malloc(len))) {
 		return NULL;
 	}
 	if (PyObject_AsWriteBuffer(pyRetBuf, &buf, &len)) {
