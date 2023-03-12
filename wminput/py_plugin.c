@@ -88,17 +88,17 @@ int py_init(void)
 
 	Py_InitializeEx(0);
 
-	if (!(PyCWiidModule = PyImport_ImportModule("cwiid"))) {
-		PyErr_Print();
-		goto ERR_HND;
-	}
-
 	if (!(PySysModule = PyImport_ImportModule("sys"))) {
 		PyErr_Print();
 		goto ERR_HND;
 	}
 
 	if (!(PyPath = PyObject_GetAttrString(PySysModule, "path"))) {
+		PyErr_Print();
+		goto ERR_HND;
+	}
+
+	if (!(PyCWiidModule = PyImport_ImportModule("cwiid"))) {
 		PyErr_Print();
 		goto ERR_HND;
 	}

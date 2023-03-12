@@ -32,7 +32,7 @@ extern PyTypeObject Wiimote_Type;
 extern PyObject *ConvertMesgArray(int, union cwiid_mesg []);
 
 /* cwiid module initializer */
-PyMODINIT_FUNC initcwiid(void);
+PyMODINIT_FUNC init_cwiid(void);
 
 /* constants, enumerations */
 #define CWIID_CONST_MACRO(a) {#a, CWIID_##a}
@@ -146,7 +146,7 @@ static struct PyModuleDef cwiidDef = {
 	NULL,
 };
 
-PyMODINIT_FUNC initcwiid(void)
+PyMODINIT_FUNC init_cwiid(void)
 {
 	PyObject *Module;
 	PyObject *CObj;
@@ -157,6 +157,7 @@ PyMODINIT_FUNC initcwiid(void)
 	}
 
 	if (!(Module = PyModule_Create(&cwiidDef))) {
+		PyErr_Print();
 		return NULL;
 	}
 
@@ -171,6 +172,7 @@ PyMODINIT_FUNC initcwiid(void)
 	}
 
 	if (!(CObj = PyCapsule_New(ConvertMesgArray, NULL, NULL))) {
+		PyErr_Print();
 		return NULL;
 	}
 	PyModule_AddObject(Module, "ConvertMesgArray", CObj);

@@ -54,8 +54,7 @@ static PyObject *Wiimote_disable(Wiimote *self, PyObject *args, PyObject *kwds);
 static int Wiimote_set_mesg_callback(Wiimote *self, PyObject *args, void *closure);
 static PyObject *Wiimote_get_mesg(Wiimote *self);
 static PyObject *Wiimote_get_state(Wiimote *self, void *closure);
-static PyObject *Wiimote_get_acc_cal(Wiimote *self, PyObject *args,
-                                     PyObject *kwds);
+static PyObject *Wiimote_get_acc_cal(Wiimote *self, PyObject *args, PyObject *kwds);
 static PyObject *Wiimote_get_balance_cal(Wiimote *self);
 
 static PyObject *Wiimote_request_status(Wiimote *self);
@@ -152,8 +151,7 @@ PyTypeObject Wiimote_Type = {
 };
 
 /* Allocate and deallocate functions */
-static PyObject *
-	Wiimote_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+static PyObject *Wiimote_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 {
 	Wiimote* self;
 
@@ -297,8 +295,7 @@ static PyObject *Wiimote_disable(Wiimote *self, PyObject *args, PyObject *kwds)
 	Py_RETURN_NONE;
 }
 
-static int
-	Wiimote_set_mesg_callback(Wiimote *self, PyObject *NewCallback,
+static int Wiimote_set_mesg_callback(Wiimote *self, PyObject *NewCallback,
 	                          void *closure)
 {
 	PyObject *OldCallback;
@@ -691,8 +688,7 @@ static int Wiimote_set_led(Wiimote *self, PyObject *PyLed, void *closure)
 	return 0;
 }
 
-static int
-	Wiimote_set_rumble(Wiimote *self, PyObject *PyRumble, void *closure)
+static int Wiimote_set_rumble(Wiimote *self, PyObject *PyRumble, void *closure)
 {
 	long rumble;
 
@@ -714,8 +710,7 @@ static int
 	return 0;
 }
 
-static int
-	Wiimote_set_rpt_mode(Wiimote *self, PyObject *PyRptMode, void *closure)
+static int Wiimote_set_rpt_mode(Wiimote *self, PyObject *PyRptMode, void *closure)
 {
 	long rpt_mode;
 
