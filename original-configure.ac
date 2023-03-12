@@ -112,6 +112,7 @@ AC_OUTPUT(
 	[libcwiid/Makefile]
 	[libcwiid/cwiid.pc]
 	[wmdemo/Makefile]
+	[wmgui/Makefile]
 	[wminput/Makefile]
 	[wminput/plugins/Makefile]
 	[wminput/plugins/ir_ptr/Makefile]
