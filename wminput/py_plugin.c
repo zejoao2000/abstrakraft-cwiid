@@ -47,7 +47,7 @@ static PyObject *PyWiimote = NULL;
 static PyObject *(*ConvertMesgArray)(int, union cwiid_mesg[]);
 
 static int py_plugin_info(struct plugin *, PyObject *);
-static PyObject *set_rpt_mode(PyObject *, PyObject *, PyObject *);
+static PyObject *set_rpt_mode(PyObject *, PyObject *);
 
 #define WMPLUGIN_CONST_MACRO(a) {#a, WMPLUGIN_##a}
 static struct {
