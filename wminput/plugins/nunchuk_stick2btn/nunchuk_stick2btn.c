@@ -48,6 +48,8 @@ struct wmplugin_info *wmplugin_info() {
 	return &info;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 int wmplugin_init(int id, cwiid_wiimote_t *arg_wiimote)
 {
 	data.buttons = 0;
@@ -57,6 +59,7 @@ int wmplugin_init(int id, cwiid_wiimote_t *arg_wiimote)
 
 	return 0;
 }
+#pragma GCC diagnostic pop
 
 struct wmplugin_data *wmplugin_exec(int mesg_count, union cwiid_mesg mesg[])
 {

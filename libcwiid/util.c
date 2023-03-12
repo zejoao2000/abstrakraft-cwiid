@@ -39,11 +39,14 @@ int cwiid_set_err(cwiid_err_t *err)
 	return 0;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 void cwiid_err_default(struct wiimote *wiimote, const char *str, va_list ap)
 {
 	vfprintf(stderr, str, ap);
 	fprintf(stderr, "\n");
 }
+#pragma GCC diagnostic pop
 
 void cwiid_err(struct wiimote *wiimote, const char *str, ...)
 {

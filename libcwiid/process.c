@@ -39,6 +39,8 @@ int process_error(struct wiimote *wiimote, ssize_t len, struct mesg_array *ma)
 	return 0;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 int process_status(struct wiimote *wiimote, const unsigned char *data,
                    struct mesg_array *ma)
 {
@@ -62,6 +64,7 @@ int process_status(struct wiimote *wiimote, const unsigned char *data,
 
 	return 0;
 }
+#pragma GCC diagnostic pop
 
 int process_btn(struct wiimote *wiimote, const unsigned char *data,
                 struct mesg_array *ma)
@@ -171,6 +174,8 @@ int process_ir12(struct wiimote *wiimote, const unsigned char *data,
 	return 0;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 int process_ext(struct wiimote *wiimote, unsigned char *data,
                 unsigned char len, struct mesg_array *ma)
 {
@@ -253,6 +258,7 @@ int process_ext(struct wiimote *wiimote, unsigned char *data,
 
 	return 0;
 }
+#pragma GCC diagnostic pop
 
 int process_read(struct wiimote *wiimote, unsigned char *data)
 {

@@ -75,6 +75,8 @@ void print_usage(void)
 	printf("\t-w, --wait\t\tWait indefinitely for wiimote to connect.\n");
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 void cwiid_err_connect(struct wiimote *wiimote, const char *str, va_list ap)
 {
 	/* TODO: temporary kludge to stifle error messages from cwiid_open */
@@ -83,6 +85,7 @@ void cwiid_err_connect(struct wiimote *wiimote, const char *str, va_list ap)
 		fprintf(stderr, "\n");
 	}
 }
+#pragma GCC diagnostic pop
 
 int main(int argc, char *argv[])
 {
@@ -400,6 +403,8 @@ int wmplugin_set_rpt_mode(int id, uint8_t flags)
 	return 0;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count,
                     union cwiid_mesg mesg[], struct timespec *timestamp)
 {
@@ -430,6 +435,7 @@ void cwiid_callback(cwiid_wiimote_t *wiimote, int mesg_count,
 	}
 	send_event(&conf, EV_SYN, SYN_REPORT, 0);
 }
+#pragma GCC diagnostic pop
 
 void process_btn_mesg(struct cwiid_btn_mesg *mesg)
 {
