@@ -455,7 +455,7 @@ static PyObject *Wiimote_get_state(Wiimote* self, void *closure)
 				}
 
 				if (state.ir_src[i].size != -1) {
-					if (!(PySize = PyInt_FromLong(
+					if (!(PySize = PyLong_FromLong(
 					  (long)state.ir_src[i].size))) {
 						Py_DECREF(PyState);
 						Py_DECREF(PyIrSrc);
@@ -682,7 +682,7 @@ static int Wiimote_set_led(Wiimote *self, PyObject *PyLed, void *closure)
 		return -1;
 	}
 
-	if (((led = PyInt_AsLong(PyLed)) == -1) && PyErr_Occurred()) {
+	if (((led = PyLong_AsLong(PyLed)) == -1) && PyErr_Occurred()) {
 		return -1;
 	}
 
@@ -705,7 +705,7 @@ static int
 		return -1;
 	}
 
-	if (((rumble = PyInt_AsLong(PyRumble)) == -1) && PyErr_Occurred()) {
+	if (((rumble = PyLong_AsLong(PyRumble)) == -1) && PyErr_Occurred()) {
 		return -1;
 	}
 
@@ -728,7 +728,7 @@ static int
 		return -1;
 	}
 
-	if (((rpt_mode = PyInt_AsLong(PyRptMode)) == -1) && PyErr_Occurred()) {
+	if (((rpt_mode = PyLong_AsLong(PyRptMode)) == -1) && PyErr_Occurred()) {
 		return -1;
 	}
 
@@ -943,7 +943,7 @@ PyObject *ConvertMesgArray(int mesg_count, union cwiid_mesg mesg[])
 					}
 
 					if (mesg[i].ir_mesg.src[j].size != -1) {
-						if (!(PySize = PyInt_FromLong(
+						if (!(PySize = PyLong_FromLong(
 						  (long)mesg[i].ir_mesg.src[j].size))) {
 							Py_DECREF(PyIrList);
 							Py_DECREF(PyIrSrc);

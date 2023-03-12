@@ -202,7 +202,7 @@ int py_plugin_open(struct plugin *plugin, char *dir)
 	PyObject *PyStr;
 	PyObject *PyErrType, *PyErr, *PyTraceback;
 
-	if (!(PyStr = PyString_FromString(dir))) {
+	if (!(PyStr = PyUnicode_FromString(dir))) {
 		PyErr_Print();
 		return -1;
 	}
@@ -357,7 +357,7 @@ static int py_plugin_info(struct plugin *plugin, PyObject *info)
 			goto ERR_HND;
 		}
 
-		if (!(plugin->info->button_info[i].name = PyString_AsString(PyObj))) {
+		if (!(plugin->info->button_info[i].name = PyUnicode_AsUTF8(PyObj))) {
 			PyErr_Print();
 			Py_DECREF(PyObj);
 			goto ERR_HND;
@@ -521,7 +521,7 @@ int py_plugin_exec(struct plugin *plugin, int mesg_count,
 		if (PyObj == Py_None) {
 			plugin->data->axes[i].valid = 0;
 		}
-		else if (!PyInt_Check(PyObj)) {
+		else if (!PyLong_Check(PyObj)) {
 			wminput_err("Type error on wminput_exec: bad axis value");
 			Py_DECREF(PyObj);
 			Py_DECREF(PyData);
@@ -529,7 +529,7 @@ int py_plugin_exec(struct plugin *plugin, int mesg_count,
 		}
 		else {
 			plugin->data->axes[i].valid = 1;
-			plugin->data->axes[i].value = PyInt_AsLong(PyObj);
+			plugin->data->axes[i].value = PyLong_AsLong(PyObj);
 		}
 
 		Py_DECREF(PyObj);
@@ -546,7 +546,7 @@ int py_plugin_param_int(struct plugin *plugin, int i, int value)
 
 	switch (plugin->info->param_info[i].type) {
 	case WMPLUGIN_PARAM_INT:
-		PyObj = PyInt_FromLong(value);
+		PyObj = PyLong_FromLong(value);
 		if (PyObject_SetAttrString(((struct py_plugin *)plugin->p)->handle,
 		                           plugin->info->param_info[i].name,
 		                           PyObj)) {
@@ -576,7 +576,7 @@ int py_plugin_param_float(struct plugin *plugin, int i, float value)
 	case WMPLUGIN_PARAM_INT:
 		wminput_err("possible loss of precision: %s.%s (cast float to int)",
 		            plugin->name, plugin->info->param_info[i].name);
-		PyObj = PyInt_FromLong((int)value);
+		PyObj = PyLong_FromLong((int)value);
 		if (PyObject_SetAttrString(((struct py_plugin *)plugin->p)->handle,
 		                           plugin->info->param_info[i].name,
 		                           PyObj)) {
