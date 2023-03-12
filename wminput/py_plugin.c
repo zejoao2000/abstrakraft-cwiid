@@ -62,8 +62,7 @@ static struct {
 };
 
 static PyMethodDef Module_Methods[] = {
-	{"set_rpt_mode", (PyCFunctionWithKeywords)set_rpt_mode, METH_VARARGS | METH_KEYWORDS,
-	 "set_rpt_mode(id, rpt_mode)\n\nset the plugin report mode"},
+	{"set_rpt_mode", (PyCFunction)set_rpt_mode, METH_VARARGS | METH_KEYWORDS, "set_rpt_mode(id, rpt_mode)\n\nset the plugin report mode"},
 	{NULL, NULL, 0, NULL}
 };
 
