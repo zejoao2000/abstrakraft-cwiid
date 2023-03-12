@@ -61,11 +61,18 @@ static struct {
 	{NULL, 0}
 };
 
-static PyMethodDef Module_Methods[] = 
-{
+static PyMethodDef Module_Methods[] = {
 	{"set_rpt_mode", (PyCFunction)set_rpt_mode, METH_VARARGS | METH_KEYWORDS,
 	 "set_rpt_mode(id, rpt_mode)\n\nset the plugin report mode"},
 	{NULL, NULL, 0, NULL}
+};
+
+static struct PyModuleDef wmpluginDef = {
+	PyModuleDef_HEAD_INIT,
+	"wmplugin",
+	"wminput plugin interface",
+	-1,
+	Module_Methods
 };
 
 int py_init(void)
@@ -90,8 +97,7 @@ int py_init(void)
 		goto ERR_HND;
 	}
 
-	if (!(PyObj = PyObject_GetAttrString(PyCWiidModule,
-	                                      "ConvertMesgArray"))) {
+	if (!(PyObj = PyObject_GetAttrString(PyCWiidModule, "ConvertMesgArray"))) {
 		PyErr_Print();
 		goto ERR_HND;
 	}
@@ -99,8 +105,7 @@ int py_init(void)
 	Py_DECREF(PyObj);
 
 	/* note: PyWmPluginModule is a borrowed reference - do not decref */
-	if (!(PyWmPluginModule = Py_InitModule3("wmplugin", Module_Methods,
-	                                        "wminput plugin interface"))) {
+	if (!(PyWmPluginModule = PyModule_Create(&wmpluginDef))) {
 		PyErr_Print();
 		goto ERR_HND;
 	}

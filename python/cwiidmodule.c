@@ -130,10 +130,17 @@ static struct {
 };
 
 /* Associates cwiid functions with python ones */
-static PyMethodDef Module_Methods[] = 
-{
+static PyMethodDef Module_Methods[] = {
 	{NULL, NULL, 0, NULL}
 };
+
+static struct PyModuleDef cwiidDef = {
+        PyModuleDef_HEAD_INIT,
+        "cwiid",
+        "CWiid Wiimote Interface",
+        -1,
+        module_functions
+}
 
 PyMODINIT_FUNC initcwiid(void)
 {
@@ -147,8 +154,7 @@ PyMODINIT_FUNC initcwiid(void)
 		return;
 	}
 
-	if (!(Module = Py_InitModule3("cwiid", Module_Methods,
-	  "CWiid Wiimote Interface"))) {
+	if (!(Module = PyModule_Create(&cwiidDef))) {
 		return;
 	}
 
