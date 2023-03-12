@@ -107,7 +107,7 @@ int py_init(void)
 		PyErr_Print();
 		goto ERR_HND;
 	}
-	ConvertMesgArray = PyCapsule_GetPointer(PyObj, NULL);
+	ConvertMesgArray = PyCapsule_GetPointer(PyObj, "dynamr");
 	Py_DECREF(PyObj);
 
 	/* note: PyWmPluginModule is a borrowed reference - do not decref */
